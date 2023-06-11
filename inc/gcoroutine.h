@@ -94,9 +94,9 @@ void g_coroutine_free(GCoroutine *self);
   }
 
 #define co_timer_start(t, ms)                                                  \
-  (t).start = g_tick_count();                                                  \
+  (t).start = g_tick();                                                  \
   (t).interval = ms;
-#define co_timer_expired(t) (g_tick_count() > (t).start + (t).interval)
+#define co_timer_expired(t) (g_tick() > (t).start + (t).interval)
 #define co_sleep(co, ms)                                                       \
   co_timer_start((co)->sleep_timer, ms);                                       \
   co_wait_until(co, co_timer_expired((co)->sleep_timer));

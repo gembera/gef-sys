@@ -1,12 +1,13 @@
 #include "gchannel.h"
 #include "gcoroutine.h"
 #include "glib.h"
+#include "gsys.h"
 #include <assert.h>
 
 static GArray *channel_case_check = NULL;
 static void channel_case_record(gcstr label, gint num, gint sleep_time) {
   g_array_add(channel_case_check, gint, num);
-  printf("\n%ld(%d) > %s : %d\n", g_tick_count(), sleep_time, label, num);
+  printf("\n%ld(%d) > %s : %d\n", g_tick(), sleep_time, label, num);
 }
 typedef struct {
   gint i;
@@ -34,7 +35,7 @@ static GCoroutineStatus sender_handler(GCoroutine *co) {
   co_begin(co);
   for (ud->i = 0; ud->i < 5; ud->i++) {
     g_value_set_int(&ud->num, ud->i * ud->i);
-    ud->sleep_time = g_rand(100);
+    ud->sleep_time = rand() % 100;
     co_sleep(co, ud->sleep_time);
     co_wait_until(co, g_channel_write(ud->channel, &ud->num));
     channel_case_record("sender", g_value_int(&ud->num), ud->sleep_time);
@@ -47,7 +48,7 @@ static GCoroutineStatus receiver_handler(GCoroutine *co) {
   ReceiverUserData *ud = (ReceiverUserData *)co->user_data;
   co_begin(co);
   do {
-    ud->sleep_time = g_rand(100);
+    ud->sleep_time = rand() % 100;
     co_sleep(co, ud->sleep_time);
     co_wait_until(co, g_channel_read(ud->channel, &ud->num));
     if (g_value_is_channel_closed(&ud->num) || g_value_is_error(&ud->num))
@@ -125,7 +126,7 @@ static GCoroutineStatus sender_error_handler(GCoroutine *co) {
   co_begin(co);
   for (ud->i = 0; ud->i < 5; ud->i++) {
     g_value_set_int(&ud->num, ud->i * ud->i);
-    ud->sleep_time = g_rand(100);
+    ud->sleep_time = rand() % 100;
     co_sleep(co, ud->sleep_time);
     if (ud->i == 3) {
       g_channel_error(ud->channel, -1000, "I don't like number 3!");
@@ -187,7 +188,7 @@ static void on_channel_discard(GEvent *event, gpointer args,
                                gpointer user_data) {
   gint *count = (gint *)user_data;
   (*count)++;
-  GValue *val = ( GValue *)args;
+  GValue *val = (GValue *)args;
   printf("\ndiscard : %d\n", g_value_int(val));
 }
 
@@ -268,8 +269,8 @@ static void channel_discard_test() {
   assert(nums[2] == 4);  // send 4
   assert(nums[3] == 4);  // receive 4
   assert(nums[4] == 9);  // send 9
-  assert(nums[5] == 16);  // send 16
-  assert(nums[6] == 16);  // receive 16
+  assert(nums[5] == 16); // send 16
+  assert(nums[6] == 16); // receive 16
 
   g_array_free(channel_case_check);
 }
@@ -290,7 +291,8 @@ int test_channel(int argc, char *argv[]) {
 
   g_mem_profile(&allocated, &freed, &peak);
   g_mem_record_end();
-  printf("\r\nallocated memory: %ld  \r\nfreed memory: %ld  \r\npeak memory: %ld\r\n",
+  printf("\r\nallocated memory: %ld  \r\nfreed memory: %ld  \r\npeak memory: "
+         "%ld\r\n",
          allocated, freed, peak);
   assert(allocated == freed);
   return 0;
