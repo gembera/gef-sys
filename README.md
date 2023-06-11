@@ -1,2 +1,2 @@
-# gef-sys
-General Embedded Framework OS related library
+# Gembera System C Library
+

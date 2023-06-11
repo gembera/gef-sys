@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.21)
+project(gef-sys)
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    add_definitions("-DENABLE_MEM_PROFILE")
+    add_definitions("-DENABLE_MEM_RECORD")
+endif()
+
+aux_source_directory(src DIR_SRC_GEF_SYS)
+
+add_library(gef-sys STATIC ${DIR_SRC_GEF_SYS})
+
+add_subdirectory(libs/gef-core)
+
+target_include_directories(gef-sys PUBLIC
+    inc
+)
+target_include_directories(gef-sys PRIVATE
+    libs/gef-core/inc
+)
+
+if(PROJECT_IS_TOP_LEVEL AND CMAKE_BUILD_TYPE MATCHES Debug)
+    message(STATUS "${PROJECT_NAME} enables testing.")
+    enable_testing()
+    add_subdirectory(tests)
+endif()
