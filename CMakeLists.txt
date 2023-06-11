@@ -10,13 +10,19 @@ aux_source_directory(src DIR_SRC_GEF_SYS)
 
 add_library(gef-sys STATIC ${DIR_SRC_GEF_SYS})
 
-add_subdirectory(libs/gef-core)
+if(PROJECT_IS_TOP_LEVEL)
+    add_subdirectory(libs/gef-core)
+    target_include_directories(gef-sys PRIVATE
+        libs/gef-core/inc
+    )
+else()
+    target_include_directories(gef-sys PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/../gef-core/inc
+    )
+endif()
 
 target_include_directories(gef-sys PUBLIC
     inc
-)
-target_include_directories(gef-sys PRIVATE
-    libs/gef-core/inc
 )
 
 if(PROJECT_IS_TOP_LEVEL AND CMAKE_BUILD_TYPE MATCHES Debug)
