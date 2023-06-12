@@ -1,5 +1,6 @@
 #include "gcoroutine.h"
 #include "glib.h"
+#include "gsys.h"
 #include <assert.h>
 
 static GArray *odd_event_case_check = NULL;
