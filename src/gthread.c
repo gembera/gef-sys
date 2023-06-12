@@ -56,6 +56,7 @@ GMutex *g_mutex_new() {
   pthread_mutex_init(handle, NULL);
   return self;
 }
+
 void g_mutex_free(GMutex *self) {
   g_return_if_fail(self && self->handle);
   pthread_mutex_t *handle = (pthread_mutex_t *)self->handle;
@@ -63,11 +64,13 @@ void g_mutex_free(GMutex *self) {
   g_free(self->handle);
   g_free(self);
 }
+
 void g_mutex_lock(GMutex *self) {
   g_return_if_fail(self && self->handle);
   pthread_mutex_t *handle = (pthread_mutex_t *)self->handle;
   pthread_mutex_lock(handle);
 }
+
 void g_mutex_unlock(GMutex *self) {
   g_return_if_fail(self && self->handle);
   pthread_mutex_t *handle = (pthread_mutex_t *)self->handle;

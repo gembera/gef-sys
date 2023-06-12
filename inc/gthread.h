@@ -9,7 +9,7 @@
 #include "glib.h"
 
 typedef struct {
-  gpointer handle;
+  ghandle handle;
 } GMutex;
 
 GMutex *g_mutex_new();
@@ -21,7 +21,7 @@ typedef struct _GThread GThread;
 typedef void (*GThreadCallback)(GThread *self);
 
 struct _GThread {
-  gpointer handle;
+  ghandle handle;
   gbool force_stop;
   GThreadCallback callback;
   gpointer user_data;

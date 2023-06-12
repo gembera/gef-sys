@@ -52,7 +52,6 @@ int test_thread(int argc, const char *argv[]) {
     GMap *worker_data = g_map_new(NULL);
     g_map_set(worker_data, "mutex", mutex);
     g_map_set(worker_data, "total", &total);
-    GMutex *mutex1 = g_map_get(worker_data, "mutex");
     workers[i] =
         g_thread_new(worker_callback, worker_data, (GFreeCallback)g_map_free);
     g_thread_start(workers[i]);

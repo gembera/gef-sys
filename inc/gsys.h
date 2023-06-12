@@ -8,6 +8,8 @@
 #define __G_SYS_H__
 #include "glib.h"
 
+typedef gpointer ghandle;
+
 #ifdef _WIN32
 int gettimeofday(struct timeval *tv, void *not_used);
 #else
