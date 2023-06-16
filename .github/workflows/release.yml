@@ -17,7 +17,7 @@ jobs:
     - name: Install package
       run: npm install
     - name: Testing
-      run: npm run debug:cmake && npm run debug:build && npm run debug:test
+      run: npm run sync && npm run debug:cmake && npm run debug:build && npm run debug:test
   publish:
     runs-on: ubuntu-latest
     steps:
