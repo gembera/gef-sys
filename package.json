@@ -1,6 +1,6 @@
 {
   "name": "@gembera/gef-sys",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "repository": "https://github.com/gembera/gef-sys.git",
   "author": "Xinjie ZHANG <xinjie.zhang@gmail.com>",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "release:cmake": "rimraf build/release && make-dir build/release && cd build/release && cmake ../..",
     "release:build": "cd build/release && cmake --build .",
     "release:test": "cd build/release && make ctest",
-    "postinstall": "cpr node_modules/@gembera/ pkgs/ -d"
+    "sync": "cpr node_modules/@gembera/ pkgs/ -d"
   },
   "devDependencies": {
     "cpr": "^3.0.1",
