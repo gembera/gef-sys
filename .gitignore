@@ -1,6 +1,10 @@
 .DS_Store
 build
 ~*.md
+node_modules
+*-lock.*
+*.lock
+pkgs
 
 # Cmake files
 CMakeCache.txt

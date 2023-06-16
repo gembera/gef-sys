@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/build/tests/all-gef-sys-tests",
             "cwd": "${workspaceRoot}",
-            "args": ["test_thread"]
+            "args": ["test_channel"]
         }
     ]
 }
