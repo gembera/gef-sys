@@ -13,5 +13,3 @@ Makefile
 cmake_install.cmake
 CTestTestfile.cmake
 Testing
-debug
-release
