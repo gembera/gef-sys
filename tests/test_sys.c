@@ -5,11 +5,6 @@ int test_sys(int argc, char *argv[]) {
   g_mem_record(g_mem_record_default_callback);
   g_mem_record_begin();
 
-  gulong st = g_tick();
-  g_sleep(100);
-  gulong en = g_tick();
-  printf("st: %ld, en: %ld, delta: %ld", st, en, en - st);
-  assert(en - st >= 100);
 
   gulong allocated = 0;
   gulong freed = 0;

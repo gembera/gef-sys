@@ -1,6 +1,6 @@
 {
   "name": "@gembera/gef-sys",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "repository": "https://github.com/gembera/gef-sys.git",
   "author": "Xinjie ZHANG <xinjie.zhang@gmail.com>",
   "license": "MIT",
@@ -13,6 +13,6 @@
     "postinstall": "gsync"
   },
   "dependencies": {
-    "@gembera/gef-core": "^1.0.1"
+    "@gembera/gef-core": "^1.1.0"
   }
 }

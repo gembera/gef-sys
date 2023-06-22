@@ -1,5 +1,5 @@
 #include "glib.h"
-#include "gsys.h"
+#include "gtime.h"
 #include "gthread.h"
 #include <assert.h>
 
