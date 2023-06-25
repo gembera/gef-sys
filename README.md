@@ -1,3 +1,5 @@
+[![tests & release](https://github.com/gembera/gef-sys/actions/workflows/release.yml/badge.svg)](https://github.com/gembera/gef-sys/actions/workflows/release.yml)
+
 # How to build
 Make sure you have installed [gef-cli](https://github.com/gembera/gef-cli). 
 
