@@ -15,3 +15,6 @@ yarn release make
 yarn release build
 yarn release test
 ```
+
+# Sponsors
+[<img src="https://www.carota.ai/logo-512.png" width="128">](https://www.carota.ai)
