@@ -5,6 +5,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../inc ${CMAKE_CURRENT_BINARY_DI
 create_test_sourcelist(tests
     all_test.c
     test_sys.c
+    test_filestream.c
     test_thread.c
 )
 
